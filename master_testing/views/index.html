@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Stellar Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Angular JS files-->
+    <script src="./libraries/js/angular.js"></script>
+    <script src="./libraries/js/angular-cookies.js"></script>
+    <script src="./libraries/lib/notification.js"></script>
+    <script src="./libraries/lib/angular-ui-notification.js"></script>
+    <script src="./angular/config.js"></script>
+    <link rel="stylesheet" href="./libraries/angular-ui-notification.min.css">
+
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+        .row.content {
+            height: 450px
+        }
+
+        /* Set gray background color and 100% height */
+
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+    <style>
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('./images/spinner.gif') 50% 50% no-repeat rgb(249, 249, 249);
+        }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loader").fadeOut("slow");
+        })
+    </script>
+</head>
+
+<body ng-app="index" ng-controller="indexController">
+    <div class="loader"></div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Home</a>
+                    </li>
+                </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    </li>
+                </ul> -->
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h1>Market values (<a href="https://api.coinmarketcap.com/v2/ticker/">coinmarketcap</a>)</h1>
+
+
+        <div class="col-sm-12 text-left">
+            <div class="row ">
+                <div class="col-sm-12" style="background-color:lavender;">
+                    <p></p>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Symbol</th>
+                                <th>Price</th>
+                                <th>% change in 1 hour</th>
+                                <th>% change in 24 hours</th>
+                                <th>% change in 7 days</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{btc.data.name}}</td>
+                                <td>{{btc.data.symbol}}</td>
+                                <td>{{btc.data.quotes.BTC.price}}-BTC = $ {{btc.data.quotes.USD.price}} </td>
+
+                                <td>BTC  {{btc.data.quotes.BTC.percent_change_1h}} % ------ USD  {{btc.data.quotes.USD.percent_change_1h}} %</td>
+                                <td>BTC  {{btc.data.quotes.BTC.percent_change_24h}} % ------ USD {{btc.data.quotes.USD.percent_change_24h}} %</td>
+                                <td>BTC  {{btc.data.quotes.BTC.percent_change_7d}} % ------ USD  {{btc.data.quotes.USD.percent_change_7d}} %</td>
+                            </tr>
+                            <tr>
+                                <td>{{eth.data.name}}</td>
+                                <td>{{eth.data.symbol}}</td>
+                                <td>{{eth.data.quotes.ETH.price}}-ETH = $ {{eth.data.quotes.USD.price}}</td>
+
+                                <td>ETH  {{eth.data.quotes.ETH.percent_change_1h}} % ------ USD  {{eth.data.quotes.USD.percent_change_1h}} %</td>
+                                <td>ETH  {{eth.data.quotes.ETH.percent_change_24h}} % ------ USD  {{eth.data.quotes.USD.percent_change_24h}} %</td>
+                                <td>ETH  {{eth.data.quotes.ETH.percent_change_7d}} % ------ USD  {{eth.data.quotes.USD.percent_change_7d}} %</td>
+                            </tr>
+                            <tr>
+                                <td>{{ltc.data.name}}</td>
+                                <td>{{ltc.data.symbol}}</td>
+                                <td>{{ltc.data.quotes.LTC.price}}-LTC = $ {{ltc.data.quotes.USD.price}}</td>
+
+                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_1h}} % ------ USD  {{ltc.data.quotes.USD.percent_change_1h}} %</td>
+                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_24h}} % ------ USD  {{ltc.data.quotes.USD.percent_change_24h}} %</td>
+                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_7d}} % ------ USD  {{ltc.data.quotes.USD.percent_change_7d}} %</td>
+                            </tr>
+
+                            <tr>
+                                <td>{{bch.data.name}}</td>
+                                <td>{{bch.data.symbol}}</td>
+                                <td>{{bch.data.quotes.BCH.price}}-BCH = $ {{bch.data.quotes.USD.price}}</td>
+
+                                <td>BCH  {{bch.data.quotes.BCH.percent_change_1h}} % ------ USD  {{bch.data.quotes.USD.percent_change_1h}} %</td>
+                                <td>BCH  {{bch.data.quotes.BCH.percent_change_24h}} % ------ USD  {{bch.data.quotes.USD.percent_change_24h}} %</td>
+                                <td>BCH  {{bch.data.quotes.BCH.percent_change_7d}} % ------ USD  {{bch.data.quotes.USD.percent_change_7d}} %</td>
+                            </tr>
+                            <tr>
+                                <td>{{xlm.data.name}}</td>
+                                <td>{{xlm.data.symbol}}</td>
+                                <td>{{xlm.data.quotes.XLM.price}}-XLM = $ {{xlm.data.quotes.USD.price}}</td>
+
+                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_1h}} % ------ USD  {{xlm.data.quotes.USD.percent_change_1h}} %</td>
+                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_24h}} % ------ USD  {{xlm.data.quotes.USD.percent_change_24h}} %</td>
+                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_7d}} % ------ USD  {{xlm.data.quotes.USD.percent_change_7d}} %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <!-- <div class="col-sm-12 text-left">
+                <h1>Users
+                   
+                </h1>
+                <hr>
+            </div> -->
+            <div class="col-sm-12 text-left">
+
+            </div>
+            <div class="col-sm-12 text-left" >
+                <h2>List of all Accounts
+                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myCreateModal">CREATE NEW STELLAR ACCOUNT</button>
+                </h2>
+                <p></p>
+                <table class="table table-condensed " style="background-color:lavender;">
+                    <thead >
+                        <tr >
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Fedareation Id</th>
+                            <th>Crypto/Fiat Type</th>
+                            <th>Balance</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="account in accounts | paging:pageSize">
+                            <td>{{account.name}}</td>
+                            <td>{{account.email}}</td>
+                            <td>{{account.phone}}</td>
+                            <td>{{account.fedarationId}}</td>
+                            <td ng-if="account.type == null">--</td>
+                            <td ng-if="account.type != null">{{account.type}} (XLM)</td>
+                            <td ng-if="account.balance == null">--</td>
+                            <td ng-if="account.balance != null">{{account.balance}}</td>
+                            <td ng-if="account.balance != null">
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="sendFromKey(account.fedarationId, account.publicKey, account.secret)">Make Transaction</button>
+                            </td>
+                            <td ng-if="account.balance == null">
+                                <button type="button" class="btn" ng-click="request(account.publicKey)">Request Balance</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="card-footer small text-muted">
+                    <span>
+                        <input type="button" value="First " ng-click="NavFirst()" class="fa fa-chevron-left btn btn-primary  btn-flat " title="First"></input>
+
+                        <input type="button" value="<<" ng-click="NavPrev()" class="fa fa-chevron-left btn btn-primary  btn-flat "></input>
+
+                        <input type="button" value="{{ localObject.pageNum }}" class="fa fa-chevron-left btn btn-primary  btn-flat " title="previous"></input>
+
+                        <input type="button" value=">>" ng-click="NavNext()" class="fa fa-chevron-right btn btn-primary  btn-flat" title="next"></input>
+
+                        <input ng-if="TotalPages()!=1" type="button" value="Last " ng-click="NavLast()" class="fa fa-chevron-left btn btn-primary  btn-flat "
+                            title="Last"></input>
+                    </span>
+
+                    <span style="float:right;">
+                        Page Size:
+                        <select style="width:40px;" ng-model="pageSize" ng-change="localObject.reset()">
+                            <option value="2">2</option>
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                        </select>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- User register Modal -->
+    <div id="myCreateModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create Account</h4>
+                </div>
+                <form>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="email">Name:</label>
+                            <input type="text" class="form-control" ng-model="user.name" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address:</label>
+                            <input type="email" data-ng-change="emailCheck(user.email)" ng-model="user.email" class="form-control" id="email">
+                            <spam ng-if="userEmailfoundlength !== 0 && userEmailfoundlength !== null" style="color:red;">Duplicate email</spam>
+                            <spam ng-if="userEmailfoundlength === 0" style="color:green;">Valied</spam>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Phone:</label>
+                            <input type="text" data-ng-change="phoneCheck(user.phone)" ng-model="user.phone" class="form-control" id="phone">
+                            <spam ng-if="userPhonefoundlength !== 0 && userEmailfoundlength !== null" style="color:red;">Duplicate Phone</spam>
+                            <spam ng-if="userPhonefoundlength === 0" style="color:green;">Valied</spam>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-if="(user.name != null && userEmailfoundlength == 0 && userPhonefoundlength == 0)" class="btn btn-primary"
+                            ng-click="create()">CREATE ACCOUNT</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- Transaction Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Transaction Modal content-->
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <form>
+                        <div class="form-group">
+                            <label>Transaction From {{fid}}</label>
+                            <input type="text" ng-model="trans.fromPubKey" ng-init="{{trans.fromPubKey === fromPublicKey}}" class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" ng-model="trans.fromSecKey" ng-init="{{trans.fromSecKey === fromSecretKey}}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd"> Transaction To:</label>
+                            <select ng-model="trans.toPubKey" class="form-control">
+                                <option value="" selected>-------Select To Public key------</option>
+                                <option ng-repeat="account in accounts" value="{{account.publicKey}}">{{account.fedarationId}}</option>
+                            </select>
+                        </div>
+                        <p ng-if="trans.toPubKey == fromPublicKey" style="color:red;"> From and To Address are same</p>
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="text" ng-model="trans.amount" class="form-control">
+                        </div>
+                        <button ng-show="((trans.toPubKey != null) && (trans.amount != null) && (trans.toPubKey != fromPublicKey))" ng-click="transaction()"
+                            type="submit" class="btn btn-success">Send</button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Angular JS -->
+    <script src="./angular/index.js"></script>
+</body>
+
+</html>
