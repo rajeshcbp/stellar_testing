@@ -107,12 +107,12 @@
     </nav>
 
     <div class="container-fluid">
-        <h1>Market values (<a href="https://api.coinmarketcap.com/v2/ticker/">coinmarketcap</a>)</h1>
-
-
+        <h1>Market values 
+            <!-- ( <a href="https://api.coinmarketcap.com/v2/ticker/">coinmarketcap</a>)</h1> -->
+        </h1>
         <div class="col-sm-12 text-left">
             <div class="row ">
-                <div class="col-sm-12" style="background-color:lavender;">
+                <div class="col-sm-12" style="background-color:#fae6f5;">
                     <p></p>
                     <table class="table table-condensed">
                         <thead>
@@ -121,56 +121,147 @@
                                 <th>Symbol</th>
                                 <th>Price</th>
                                 <th>% change in 1 hour</th>
+                                <th></th>
                                 <th>% change in 24 hours</th>
+                                <th></th>
                                 <th>% change in 7 days</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{btc.data.name}}</td>
+                                <td><a href="https://api.coinmarketcap.com/v2/ticker/1/?convert=BTC">{{btc.data.name}}</a></td>
                                 <td>{{btc.data.symbol}}</td>
                                 <td>{{btc.data.quotes.BTC.price}}-BTC = $ {{btc.data.quotes.USD.price}} </td>
 
-                                <td>BTC  {{btc.data.quotes.BTC.percent_change_1h}} % ------ USD  {{btc.data.quotes.USD.percent_change_1h}} %</td>
-                                <td>BTC  {{btc.data.quotes.BTC.percent_change_24h}} % ------ USD {{btc.data.quotes.USD.percent_change_24h}} %</td>
-                                <td>BTC  {{btc.data.quotes.BTC.percent_change_7d}} % ------ USD  {{btc.data.quotes.USD.percent_change_7d}} %</td>
+                                <td style="width: 15%;">BTC {{btc.data.quotes.BTC.percent_change_1h}} % ------ USD {{btc.data.quotes.USD.percent_change_1h}}
+                                    %
+                                </td>
+                                <td style="width: 15%;" class="pull-left"><span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="btc.data.quotes.USD.percent_change_1h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="btc.data.quotes.USD.percent_change_1h > 0"></span></td>
+                                <td style="width: 15%;">BTC {{btc.data.quotes.BTC.percent_change_24h}} % ------ USD {{btc.data.quotes.USD.percent_change_24h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="btc.data.quotes.USD.percent_change_24h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="btc.data.quotes.USD.percent_change_24h > 0"></span>
+                                </td>
+                                <td style="width: 15%;">BTC {{btc.data.quotes.BTC.percent_change_7d}} % ------ USD {{btc.data.quotes.USD.percent_change_7d}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="btc.data.quotes.USD.percent_change_7d <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="btc.data.quotes.USD.percent_change_7d > 0"></span>
+                                </td>
                             </tr>
                             <tr>
-                                <td>{{eth.data.name}}</td>
+                                <td><a href="https://api.coinmarketcap.com/v2/ticker/1027/?convert=ETH">{{eth.data.name}}</a></td>
                                 <td>{{eth.data.symbol}}</td>
                                 <td>{{eth.data.quotes.ETH.price}}-ETH = $ {{eth.data.quotes.USD.price}}</td>
 
-                                <td>ETH  {{eth.data.quotes.ETH.percent_change_1h}} % ------ USD  {{eth.data.quotes.USD.percent_change_1h}} %</td>
-                                <td>ETH  {{eth.data.quotes.ETH.percent_change_24h}} % ------ USD  {{eth.data.quotes.USD.percent_change_24h}} %</td>
-                                <td>ETH  {{eth.data.quotes.ETH.percent_change_7d}} % ------ USD  {{eth.data.quotes.USD.percent_change_7d}} %</td>
+                                <td>ETH {{eth.data.quotes.ETH.percent_change_1h}} % ------ USD {{eth.data.quotes.USD.percent_change_1h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="eth.data.quotes.USD.percent_change_1h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="eth.data.quotes.USD.percent_change_1h > 0"></span>
+                                </td>
+                                <td>ETH {{eth.data.quotes.ETH.percent_change_24h}} % ------ USD {{eth.data.quotes.USD.percent_change_24h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="eth.data.quotes.USD.percent_change_24h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="eth.data.quotes.USD.percent_change_24h > 0"></span>
+                                </td>
+                                <td>ETH {{eth.data.quotes.ETH.percent_change_7d}} % ------ USD {{eth.data.quotes.USD.percent_change_7d}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="eth.data.quotes.USD.percent_change_7d <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="eth.data.quotes.USD.percent_change_7d > 0"></span>
+                                </td>
                             </tr>
                             <tr>
-                                <td>{{ltc.data.name}}</td>
+                                <td><a href="https://api.coinmarketcap.com/v2/ticker/2/?convert=LTC">{{ltc.data.name}}</a></td>
                                 <td>{{ltc.data.symbol}}</td>
                                 <td>{{ltc.data.quotes.LTC.price}}-LTC = $ {{ltc.data.quotes.USD.price}}</td>
 
-                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_1h}} % ------ USD  {{ltc.data.quotes.USD.percent_change_1h}} %</td>
-                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_24h}} % ------ USD  {{ltc.data.quotes.USD.percent_change_24h}} %</td>
-                                <td>LTC  {{ltc.data.quotes.LTC.percent_change_7d}} % ------ USD  {{ltc.data.quotes.USD.percent_change_7d}} %</td>
+                                <td>LTC {{ltc.data.quotes.LTC.percent_change_1h}} % ------ USD {{ltc.data.quotes.USD.percent_change_1h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="ltc.data.quotes.USD.percent_change_1h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="ltc.data.quotes.USD.percent_change_1h > 0"></span>
+                                </td>
+                                <td>LTC {{ltc.data.quotes.LTC.percent_change_24h}} % ------ USD {{ltc.data.quotes.USD.percent_change_24h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="ltc.data.quotes.USD.percent_change_24h <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="ltc.data.quotes.USD.percent_change_24h > 0"></span>
+                                </td>
+                                <td>LTC {{ltc.data.quotes.LTC.percent_change_7d}} % ------ USD {{ltc.data.quotes.USD.percent_change_7d}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="ltc.data.quotes.USD.percent_change_7d <= 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="ltc.data.quotes.USD.percent_change_7d > 0"></span>
+                                </td>
                             </tr>
 
                             <tr>
-                                <td>{{bch.data.name}}</td>
+                                <td><a href="https://api.coinmarketcap.com/v2/ticker/1831/?convert=BCH">{{bch.data.name}}</a></td>
                                 <td>{{bch.data.symbol}}</td>
                                 <td>{{bch.data.quotes.BCH.price}}-BCH = $ {{bch.data.quotes.USD.price}}</td>
 
-                                <td>BCH  {{bch.data.quotes.BCH.percent_change_1h}} % ------ USD  {{bch.data.quotes.USD.percent_change_1h}} %</td>
-                                <td>BCH  {{bch.data.quotes.BCH.percent_change_24h}} % ------ USD  {{bch.data.quotes.USD.percent_change_24h}} %</td>
-                                <td>BCH  {{bch.data.quotes.BCH.percent_change_7d}} % ------ USD  {{bch.data.quotes.USD.percent_change_7d}} %</td>
+                                <td>BCH {{bch.data.quotes.BCH.percent_change_1h}} % ------ USD {{bch.data.quotes.USD.percent_change_1h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="bch.data.quotes.USD.percent_change_1h < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="bch.data.quotes.USD.percent_change_1h > 0"></span>
+                                </td>
+                                <td>BCH {{bch.data.quotes.BCH.percent_change_24h}} % ------ USD {{bch.data.quotes.USD.percent_change_24h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="bch.data.quotes.USD.percent_change_24h < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up"style="color:green;"  ng-if="bch.data.quotes.USD.percent_change_24h > 0"></span>
+                                </td>
+                                <td>BCH {{bch.data.quotes.BCH.percent_change_7d}} % ------ USD {{bch.data.quotes.USD.percent_change_7d}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="bch.data.quotes.USD.percent_change_7d < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="bch.data.quotes.USD.percent_change_7d > 0"></span>
+                                </td>
                             </tr>
                             <tr>
-                                <td>{{xlm.data.name}}</td>
+                                <td><a href="https://api.coinmarketcap.com/v2/ticker/512/?convert=XLM">{{xlm.data.name}}</a></td>
                                 <td>{{xlm.data.symbol}}</td>
                                 <td>{{xlm.data.quotes.XLM.price}}-XLM = $ {{xlm.data.quotes.USD.price}}</td>
 
-                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_1h}} % ------ USD  {{xlm.data.quotes.USD.percent_change_1h}} %</td>
-                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_24h}} % ------ USD  {{xlm.data.quotes.USD.percent_change_24h}} %</td>
-                                <td>XLM  {{xlm.data.quotes.XLM.percent_change_7d}} % ------ USD  {{xlm.data.quotes.USD.percent_change_7d}} %</td>
+                                <td>XLM {{xlm.data.quotes.XLM.percent_change_1h}} % ------ USD {{xlm.data.quotes.USD.percent_change_1h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="xlm.data.quotes.USD.percent_change_1h < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="xlm.data.quotes.USD.percent_change_1h > 0"></span>
+                                </td>
+                                <td>XLM {{xlm.data.quotes.XLM.percent_change_24h}} % ------ USD {{xlm.data.quotes.USD.percent_change_24h}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="xlm.data.quotes.USD.percent_change_24h < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="xlm.data.quotes.USD.percent_change_24h > 0"></span>
+                                </td>
+                                <td>XLM {{xlm.data.quotes.XLM.percent_change_7d}} % ------ USD {{xlm.data.quotes.USD.percent_change_7d}}
+                                    %
+                                </td>
+                                <td>
+                                    <span class="glyphicon glyphicon-arrow-down" style="color:red;" ng-if="xlm.data.quotes.USD.percent_change_7d < 0"></span>
+                                    <span class="glyphicon glyphicon-arrow-up" style="color:green;" ng-if="xlm.data.quotes.USD.percent_change_7d > 0"></span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -193,21 +284,21 @@
             <div class="col-sm-12 text-left">
 
             </div>
-            <div class="col-sm-12 text-left" >
-                <h2>List of all Accounts
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myCreateModal">CREATE NEW STELLAR ACCOUNT</button>
+            <div class="col-sm-12 text-left">
+                <h2>List of all Stellar testing Accounts
+                    
                 </h2>
                 <p></p>
                 <table class="table table-condensed " style="background-color:lavender;">
-                    <thead >
-                        <tr >
+                    <thead>
+                        <tr>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Fedareation Id</th>
                             <th>Crypto/Fiat Type</th>
                             <th>Balance</th>
-                            <th>Action</th>
+                            <th><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myCreateModal">Create New Account</button></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -221,39 +312,37 @@
                             <td ng-if="account.balance == null">--</td>
                             <td ng-if="account.balance != null">{{account.balance}}</td>
                             <td ng-if="account.balance != null">
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="sendFromKey(account.fedarationId, account.publicKey, account.secret)">Make Transaction</button>
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="sendFromKey(account.publicKey)">Make Test Transaction</button>
                             </td>
                             <td ng-if="account.balance == null">
-                                <button type="button" class="btn" ng-click="request(account.publicKey)">Request Balance</button>
+                                <button type="button" class="btn" ng-click="request(account.publicKey)">Request for Balance</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <div class="card-footer small text-muted">
-                    <span>
-                        <input type="button" value="First " ng-click="NavFirst()" class="fa fa-chevron-left btn btn-primary  btn-flat " title="First"></input>
+                <div ng-if="payedUserslength === pageSize" style="margin-bottom: 20px;">
+                    <span style="margin-left: 15px;">
+                      <input type="button" value="FIRST " ng-click="NavFirst()" class="fa fa-chevron-left btn white btn-round btn-primary" title="FIRST">
 
-                        <input type="button" value="<<" ng-click="NavPrev()" class="fa fa-chevron-left btn btn-primary  btn-flat "></input>
+                      <input type="button" value="<<" ng-click="NavPrev()" class="fa fa-chevron-left btn white btn-round btn-primary">
 
-                        <input type="button" value="{{ localObject.pageNum }}" class="fa fa-chevron-left btn btn-primary  btn-flat " title="previous"></input>
+                      <input type="button" value="{{ localObject.pageNum }}" class="fa fa-chevron-left btn white btn-round btn-primary" title="PREVIOUS">
 
-                        <input type="button" value=">>" ng-click="NavNext()" class="fa fa-chevron-right btn btn-primary  btn-flat" title="next"></input>
+                      <input type="button" value=">>" ng-click="NavNext()" class="fa fa-chevron-right btn white btn-round btn-primary" title="NEXT">
 
-                        <input ng-if="TotalPages()!=1" type="button" value="Last " ng-click="NavLast()" class="fa fa-chevron-left btn btn-primary  btn-flat "
-                            title="Last"></input>
+                      <input ng-if="TotalPages()!=1" type="button" value="LAST " ng-click="NavLast()" class="fa fa-chevron-left btn white btn-round btn-primary"
+                        title="Last">
                     </span>
-
-                    <span style="float:right;">
-                        Page Size:
-                        <select style="width:40px;" ng-model="pageSize" ng-change="localObject.reset()">
-                            <option value="2">2</option>
-                            <option value="5" selected>5</option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                        </select>
+                    <span class="pull-right">
+                      Page Size:
+                      <select class="pull-right" style="width:40px;margin-right: 33px;" ng-model="pageSize" ng-change="localObject.reset()">
+                        <option value="2">2</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20" selected>20</option>
+                      </select>
                     </span>
-
-                </div>
+                  </div>
             </div>
         </div>
     </div>
@@ -307,11 +396,11 @@
 
                     <form>
                         <div class="form-group">
-                            <label>Transaction From {{fid}}</label>
-                            <input type="text" ng-model="trans.fromPubKey" ng-init="{{trans.fromPubKey === fromPublicKey}}" class="form-control" disabled>
+                            <label>Transaction From <a>{{trans.fedarationId}}</label>
+                            <input type="text" ng-model="trans.fromPubKey "  class="form-control" disabled>
                         </div>
                         <div class="form-group">
-                            <input type="hidden" ng-model="trans.fromSecKey" ng-init="{{trans.fromSecKey === fromSecretKey}}" class="form-control">
+                            <input type="hidden" ng-model="trans.fromSecKey"  class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="pwd"> Transaction To:</label>
@@ -320,12 +409,12 @@
                                 <option ng-repeat="account in accounts" value="{{account.publicKey}}">{{account.fedarationId}}</option>
                             </select>
                         </div>
-                        <p ng-if="trans.toPubKey == fromPublicKey" style="color:red;"> From and To Address are same</p>
+                        <p ng-if="trans.toPubKey == trans.fromPubKey " style="color:red;"> From and To Address are same</p>
                         <div class="form-group">
                             <label>Amount</label>
                             <input type="text" ng-model="trans.amount" class="form-control">
                         </div>
-                        <button ng-show="((trans.toPubKey != null) && (trans.amount != null) && (trans.toPubKey != fromPublicKey))" ng-click="transaction()"
+                        <button ng-show="((trans.toPubKey != null) && (trans.amount != null) && (trans.toPubKey != trans.fromPubKey ))" ng-click="transaction()"
                             type="submit" class="btn btn-success">Send</button>
 
                     </form>

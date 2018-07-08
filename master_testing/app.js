@@ -51,6 +51,8 @@ app.post("/CreateNewAccount", newAccount.createNewAccount);
 app.get("/GetAllAccountsList", accountsList.listOfAllAccounts);
 app.get("/GetAccountBalance/:publicKey", balance.getAccountBalance);
 
+app.get("/GetUserDetails/:publicKey", newAccount.getUserDetails);
+
 app.get("/CheckPhone/:phone", newAccount.CheckPhone);
 app.get("/CheckEmail/:email", newAccount.CheckEmail);
 

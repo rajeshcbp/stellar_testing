@@ -37,6 +37,10 @@ app.factory('indexFactory', function ($http, $window) {
             url = baseAddress + "GetAccountBalance/" + key;
             return $http.get(url);
         },
+        getUserDetails: function (key) {
+            url = baseAddress + "GetUserDetails/" + key;
+            return $http.get(url);
+        },
         sendTransaction: function (transDatas) {
             url = baseAddress + "TransactionSend";
             return $http.post(url, transDatas);
@@ -154,6 +158,9 @@ app.controller('indexController', function ($scope, $http, indexFactory, SharedO
 
     $scope.userEmailfoundlength = null;
     $scope.userPhonefoundlength = null;
+
+   
+
      //Check user email
      $scope.emailCheck = function (email) {
         console.log("email", email);
@@ -249,13 +256,31 @@ app.controller('indexController', function ($scope, $http, indexFactory, SharedO
         //End of signup api invoke    
     };
 
-    $scope.sendFromKey = function (fedId, fromPKey, fromSKey) {
-        $scope.fid = fedId;
-        console.log("fid==", $scope.fid);
+    $scope.sendFromKey = function (fromPKey, fromSKey) {
+        
         $scope.fromPublicKey = fromPKey;
         console.log("fromPublicKey==", $scope.fromPublicKey);
-        $scope.fromSecretKey = fromSKey;
-        console.log("fromSecretKey==", $scope.fromSecretKey);
+       
+        indexFactory.getUserDetails($scope.fromPublicKey,).success(function (data) {
+            if (data) {
+                $scope.transsaction = data;
+                $scope.trans = {
+                    "fromPubKey": data.publicKey,
+                    "fromSecKey": data.secret,
+                    "fedarationId": data.fedarationId
+                }
+
+            } else {
+                $scope.trans = data;
+                console.log("errorMessage =", $scope.errorMessage);
+            }
+        }).error(function (data) {
+            Notification.error({
+                message:  'userProfile Adding Failed ',
+                delay: 1000
+            });
+            //$scope.error = "An Error has occured while Adding userProfile! " + data.ExceptionMessage;
+        });
     };
 
     $scope.transaction = function () {
@@ -270,7 +295,7 @@ app.controller('indexController', function ($scope, $http, indexFactory, SharedO
             }
         }).error(function (data) {
             Notification.error({
-                message: userData.name + ' ' + ',userProfile Adding Failed ',
+                message:  'userProfile Adding Failed ',
                 delay: 1000
             });
             //$scope.error = "An Error has occured while Adding userProfile! " + data.ExceptionMessage;

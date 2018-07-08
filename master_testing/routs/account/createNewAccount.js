@@ -129,3 +129,21 @@ module.exports.getGdexCurrencies = function (req, res) {
 	  publicClient.getCurrencies(callback);
 }
 
+module.exports.getUserDetails = function (req, res) {
+	stellarAccount.findOne({
+		publicKey: req.params.publicKey
+	}, function (err, result) {
+
+		if (err) {
+			res.send({
+				"code": 500,
+				"failed": "error ocurred"
+			})
+			console.log(" error", err.message);
+		}
+		console.log("  User details fetched succesfully ", result);
+		//   log.info( "  User details fetched succesfully  " );
+		res.status(200).json(result);
+
+	})
+}
