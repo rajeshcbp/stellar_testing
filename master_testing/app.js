@@ -30,7 +30,7 @@ app.get('/', function (req, res) {
 
 //======================================================Connect to Mongoose================================================================
 
-var promise = mongoose.connect('mongodb://sodiotech:sodio123@ds147030.mlab.com:47030/stellar_test_2', {
+var promise = mongoose.connect('mongodb://localhost/your_db_name', {
     useMongoClient: true,
     /* other options */
 });
