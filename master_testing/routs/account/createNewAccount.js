@@ -33,7 +33,7 @@ module.exports.createNewAccount = function (req, res) {
 			console.error('ERROR!', error || body);
 		} else {
 			console.log('SUCCESS! You have a new account :)\n', body);
-			var uniqueId = req.body.phone + "*cashstash.me"
+			var uniqueId = req.body.phone + "*your_Domine.com"
 			var formData = {
 				"name": req.body.name,
 				"email": req.body.email,
